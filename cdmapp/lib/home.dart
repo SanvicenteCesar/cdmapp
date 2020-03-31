@@ -25,6 +25,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         title: Text('Consultorio Dental Merida'),
 
       ),
@@ -32,6 +33,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentindex,
         onTap: cambiarVista,
+        type: BottomNavigationBarType.fixed,
         fixedColor: Colors.deepPurpleAccent,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

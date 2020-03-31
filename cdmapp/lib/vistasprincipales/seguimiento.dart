@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Seguimiento extends StatelessWidget {
+class Seguimiento extends StatefulWidget {
+  @override
+  _SeguimientoState createState() => _SeguimientoState();
+}
+
+class _SeguimientoState extends State<Seguimiento> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Aqui va Seguimiento'),
+      child: Text('data'),
       
     );
   }
