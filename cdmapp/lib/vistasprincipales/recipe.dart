@@ -14,9 +14,30 @@ class _RecipesState extends State<Recipes> {
   @override
   Widget build(BuildContext context) {
     print(widget.recipes.length);
-    return Container(
-      
-      
+    return Scaffold(
+       appBar: AppBar(
+        title: Text('Recipes Personales'),
+        leading: Container(
+          child: Icon(Icons.receipt),
+        ),
+      ),
+      body: ListView.builder(
+            itemCount: widget.recipes.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(Icons.receipt),
+                title: Text('Rp : '+ widget.recipes[index].rp,
+                 style: TextStyle(
+                   fontSize: 20,
+                   fontStyle: FontStyle.italic,
+                   color: Colors.black87,
+                   letterSpacing: 0.4
+                 ),),
+                subtitle: Text('Indicaciones: ' + widget.recipes[index].indicaciones + '  Fecha: ' + widget.recipes[index].firma),
+                trailing: Icon(Icons.recent_actors ),
+                        );
+            },
+          ),
     );
   }
 }

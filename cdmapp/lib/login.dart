@@ -172,7 +172,8 @@ TextEditingController _controlleremail = new TextEditingController();
        _controlleremail.clear();
         _controllerpassword.clear();
         print("------------------");
-       print(variable);
+       print(variable.name);
+       print(variable.id);
       // traerRecipes(variable.id);
        
        Navigator.push(context, MaterialPageRoute(builder: (_) => Home(pacient: variable ,)));

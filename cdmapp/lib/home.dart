@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cdmapp/class/consultasclass.dart';
 import 'package:cdmapp/class/pacienteclass.dart';
 import 'package:cdmapp/class/presupuestoclass.dart';
 import 'package:cdmapp/class/recipeclass.dart';
@@ -22,21 +23,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<Recip> _recipe = new List<Recip>();
   List<Presupuest> _presupuestos = new List<Presupuest>();
+  List<Consulta> _consultas = new List<Consulta>();
    int _currentindex = 0;
-
-   final List<Widget> _children = [
-     Perfil(),
-     Consultas(),
-     Evolucion(),
-     Recipes(),
-     Presupuesto(),
-     Seguimiento()
-   ];
-
 @override
   void initState() {
    traerRecipes();
    traerPresupuestos();
+   traerCosultas();
    Recipes(recipes: _recipe,);
     super.initState();
   }
@@ -96,7 +89,7 @@ class _HomeState extends State<Home> {
           return Perfil();
         break;
       case 1:
-          return Consultas();
+          return Consultas(consultas: _consultas);
         break;
       case 2:
          return  Evolucion();
@@ -137,7 +130,7 @@ class _HomeState extends State<Home> {
         _recipe = variable.items;
     });
     }
-     void traerPresupuestos() async{
+   void traerPresupuestos() async{
      int id;
      id = widget.pacient.id;
      String url = 'http://10.0.2.2:3000/presupuesto/patientpresupuesto$id'; 
@@ -157,18 +150,18 @@ class _HomeState extends State<Home> {
      void traerCosultas() async{
      int id;
      id = widget.pacient.id;
-     String url = 'http://10.0.2.2:3000/recipe/patientrecipe$id'; 
+     String url = 'http://10.0.2.2:3000/consulta/patient$id'; 
 
    await http.get(url, headers: {
       'Accept': 'application/json'
     },
     ).then((response) {
        final decodedData = jsonDecode(response.body);
-       final variable = new Recipe.fromJsonList(decodedData);
+       final variable = new Consults.fromJsonList(decodedData);
        print(decodedData);
         print(variable.items);
         print('Ya estoy en Pidiendo Consultas');
-        _recipe = variable.items;
+        _consultas = variable.items;
     });
     }
 }
