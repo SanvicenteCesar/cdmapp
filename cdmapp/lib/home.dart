@@ -5,7 +5,6 @@ import 'package:cdmapp/vistasprincipales/presupuesto.dart';
 import 'package:cdmapp/vistasprincipales/recipe.dart';
 import 'package:cdmapp/vistasprincipales/seguimiento.dart';
 import 'package:flutter/material.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -20,7 +19,7 @@ class _HomeState extends State<Home> {
      Presupuesto(),
      Seguimiento()
    ];
-  GlobalKey _bottomNavigationKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

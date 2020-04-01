@@ -1,17 +1,23 @@
+
+import 'dart:convert';
+
+import 'package:cdmapp/class/pacienteclass.dart';
 import 'package:cdmapp/home.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
-
+ 
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
  bool _isHidden = true;
-
+ Paciente paciente = new Paciente();
+TextEditingController _controlleremail = new TextEditingController();
+  TextEditingController _controllerpassword = new TextEditingController();
   void _toggleVisibility() {
     setState(() {
       _isHidden = !_isHidden;
@@ -20,8 +26,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
@@ -57,11 +61,11 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       height: 40.0,
                     ),
-                    buildTextField("Correo"),
+                    buildTextField("Correo", 30, _controlleremail),
                     SizedBox(
                       height: 20.0,
                     ),
-                    buildTextField("Password"),
+                    buildTextField("Password", 20, _controllerpassword),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -79,7 +83,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     SizedBox(height: 20.0),
-                    buildButtonContainer(),
+                    buildButtonContainer(context),
                     SizedBox(
                       height: 10.0,
                     ),
@@ -94,8 +98,10 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget buildTextField(String hintText) {
+  Widget buildTextField(String hintText , int largo, TextEditingController controlador) {
     return TextField(
+      maxLength: largo,
+      controller: controlador,
       decoration: InputDecoration(
         fillColor: Colors.deepPurpleAccent,
         focusColor: Colors.deepPurpleAccent,
@@ -122,7 +128,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget buildButtonContainer() {
+  Widget buildButtonContainer(BuildContext context) {
     return GestureDetector(
       child: Container(
         height: 56.0,
@@ -145,9 +151,48 @@ class _LoginState extends State<Login> {
         ),
       ),
       onTap: () {
-        Navigator.pop(context);
-        Navigator.push(context, MaterialPageRoute(builder: (_) => Home()));
+         _logindata(context);
       },
     );
+  }
+   void _logindata(BuildContext context) async {
+    String url = "http://10.0.2.2:3000/patient/login";
+
+    http.post(url, headers: {
+      'Accept': 'application/json'
+    }, body: {
+      "username": _controlleremail.text,
+      "password": _controllerpassword.text,
+    }).then((response) {
+      if (response.contentLength > 1 ) {
+       final decodedData = jsonDecode(response.body);
+       final variable = new Paciente.mapeado(decodedData);
+        print("------------------");
+       print(variable);
+       Navigator.push(context, MaterialPageRoute(builder: (_) => Home()));
+       } else {
+       showDialog(
+          context: context,
+          builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Usuario o contraseña Incorrecta"),
+            content: Text("Verifique con si doctor si posee cuenta registrada"),
+            actions: [
+              FlatButton(
+                child: Text("Aceptar"),
+                onPressed: () {
+                  Navigator.pop(context);
+                 },
+              ),
+            ],
+            );
+    },
+  );
+       }
+    
+      
+       
+
+    });
   }
 }
