@@ -1,22 +1,22 @@
-class Pacientes {
-  List<Paciente> items = new List();
+class Recipe {
+  List<Recip> items = new List();
 
-  Pacientes();
+  Recipe();
 
-  Pacientes.fromJsonList(List<dynamic> jsonList) {
+  Recipe.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
 
     for (var item in jsonList) {
-      final work = new Paciente.fromJson(item);
+      final work = new Recip.mapeado(item);
       items.add(work);
     } //fin for
   }
 
-  Pacientes.fromJsonMap(decodedData); //fin constructor
+  Recipe.fromJsonMap(decodedData); //fin constructor
 
 }
 
-class Paciente {
+class Recip {
   int id;
   String rp;
   String indicaciones;
@@ -25,7 +25,7 @@ class Paciente {
   String idDoctor;
  
 
-  Paciente({
+  Recip({
     this.id,
     this.rp,
     this.indicaciones,
@@ -35,7 +35,7 @@ class Paciente {
     
   });
 
-  Paciente.fromJson(Map<dynamic, dynamic> json) {
+  Recip.fromJson(Map<dynamic, dynamic> json) {
     id = json["id"];
     rp = json["Rp"];
     indicaciones = json["Indicaciones"];
@@ -44,8 +44,13 @@ class Paciente {
     idDoctor = json["idDoctor"];
     
   }
-  Paciente.mapeado(Map<String, dynamic> json) {
+  Recip.mapeado(Map<String, dynamic> json) {
     id = json["id"];
+    rp = json["Rp"];
+    indicaciones = json["Indicaciones"];
+    firma = json["Firma"];
+    idPatient = json["idPatient"];
+    idDoctor = json["idDoctor"];
   }
 
   Map<String, dynamic> toMap() => {

@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:cdmapp/class/pacienteclass.dart';
+import 'package:cdmapp/class/recipeclass.dart';
 import 'package:cdmapp/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +17,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
  bool _isHidden = true;
  Paciente paciente = new Paciente();
+ List<Recip> recipe = new List<Recip>();
 TextEditingController _controlleremail = new TextEditingController();
   TextEditingController _controllerpassword = new TextEditingController();
   void _toggleVisibility() {
@@ -167,16 +169,20 @@ TextEditingController _controlleremail = new TextEditingController();
       if (response.contentLength > 1 ) {
        final decodedData = jsonDecode(response.body);
        final variable = new Paciente.mapeado(decodedData);
+       _controlleremail.clear();
+        _controllerpassword.clear();
         print("------------------");
        print(variable);
-       Navigator.push(context, MaterialPageRoute(builder: (_) => Home()));
+      // traerRecipes(variable.id);
+       
+       Navigator.push(context, MaterialPageRoute(builder: (_) => Home(pacient: variable ,)));
        } else {
        showDialog(
           context: context,
           builder: (BuildContext context) {
           return AlertDialog(
             title: Text("Usuario o contraseña Incorrecta"),
-            content: Text("Verifique con si doctor si posee cuenta registrada"),
+            content: Text("Verifique con su odontologo si posee cuenta registrada"),
             actions: [
               FlatButton(
                 child: Text("Aceptar"),
@@ -194,5 +200,7 @@ TextEditingController _controlleremail = new TextEditingController();
        
 
     });
+    
   }
+ 
 }

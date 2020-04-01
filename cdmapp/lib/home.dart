@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:cdmapp/class/pacienteclass.dart';
+import 'package:cdmapp/class/presupuestoclass.dart';
+import 'package:cdmapp/class/recipeclass.dart';
 import 'package:cdmapp/vistasprincipales/consultas.dart';
 import 'package:cdmapp/vistasprincipales/evolucion.dart';
 import 'package:cdmapp/vistasprincipales/perfil.dart';
@@ -5,12 +10,20 @@ import 'package:cdmapp/vistasprincipales/presupuesto.dart';
 import 'package:cdmapp/vistasprincipales/recipe.dart';
 import 'package:cdmapp/vistasprincipales/seguimiento.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 class Home extends StatefulWidget {
+
+  Home({this.pacient});
+
+  final Paciente pacient;
   @override
   _HomeState createState() => _HomeState();
 }
 class _HomeState extends State<Home> {
+  List<Recip> _recipe = new List<Recip>();
+  List<Presupuest> _presupuestos = new List<Presupuest>();
    int _currentindex = 0;
+
    final List<Widget> _children = [
      Perfil(),
      Consultas(),
@@ -20,15 +33,27 @@ class _HomeState extends State<Home> {
      Seguimiento()
    ];
 
+@override
+  void initState() {
+   traerRecipes();
+   traerPresupuestos();
+   Recipes(recipes: _recipe,);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
         title: Text('Consultorio Dental Merida'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.remove_circle), onPressed: (){
+            Navigator.pop(context);
+          })
+        ],
 
       ),
-      body: _children[_currentindex],
+      body: ver(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentindex,
         onTap: cambiarVista,
@@ -65,10 +90,85 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+  Widget ver() {
+    switch (_currentindex) {
+      case 0:
+          return Perfil();
+        break;
+      case 1:
+          return Consultas();
+        break;
+      case 2:
+         return  Evolucion();
+        break;
+      case 3:
+         return Recipes(recipes: _recipe,);
+        break;
+      case 4:
+           return  Presupuesto(presupuestos: _presupuestos,);
+        break;
+        case 4:
+           return  Seguimiento();
+        break;
+      default:
+    }
+
+  }
  void cambiarVista(int index) {
    setState(() {
      _currentindex = index;
    });
 
  }
+   void traerRecipes() async{
+     int id;
+     id = widget.pacient.id;
+     String url = 'http://10.0.2.2:3000/recipe/patientrecipe$id'; 
+
+   await http.get(url, headers: {
+      'Accept': 'application/json'
+    },
+    ).then((response) {
+       final decodedData = jsonDecode(response.body);
+       final variable = new Recipe.fromJsonList(decodedData);
+       print(decodedData);
+        print(variable.items);
+        print('Ya estoy en Pidiendo recipes');
+        _recipe = variable.items;
+    });
+    }
+     void traerPresupuestos() async{
+     int id;
+     id = widget.pacient.id;
+     String url = 'http://10.0.2.2:3000/presupuesto/patientpresupuesto$id'; 
+
+   await http.get(url, headers: {
+      'Accept': 'application/json'
+    },
+    ).then((response) {
+       final decodedData = jsonDecode(response.body);
+       final variable = new Presupuests.fromJsonList(decodedData);
+       print(decodedData);
+        print(variable.items);
+        print('Ya estoy en Pidiendo PRESUPUESTOS');
+        _presupuestos = variable.items;
+    });
+    }
+     void traerCosultas() async{
+     int id;
+     id = widget.pacient.id;
+     String url = 'http://10.0.2.2:3000/recipe/patientrecipe$id'; 
+
+   await http.get(url, headers: {
+      'Accept': 'application/json'
+    },
+    ).then((response) {
+       final decodedData = jsonDecode(response.body);
+       final variable = new Recipe.fromJsonList(decodedData);
+       print(decodedData);
+        print(variable.items);
+        print('Ya estoy en Pidiendo Consultas');
+        _recipe = variable.items;
+    });
+    }
 }
