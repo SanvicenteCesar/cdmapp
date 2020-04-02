@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cdmapp/class/consultasclass.dart';
+import 'package:cdmapp/class/evolucionclass.dart';
 import 'package:cdmapp/class/pacienteclass.dart';
 import 'package:cdmapp/class/presupuestoclass.dart';
 import 'package:cdmapp/class/recipeclass.dart';
@@ -24,12 +25,14 @@ class _HomeState extends State<Home> {
   List<Recip> _recipe = new List<Recip>();
   List<Presupuest> _presupuestos = new List<Presupuest>();
   List<Consulta> _consultas = new List<Consulta>();
+   List<Evolucio> _evoluciones = new List<Evolucio>();
    int _currentindex = 0;
 @override
   void initState() {
    traerRecipes();
    traerPresupuestos();
    traerCosultas();
+   traerEvolucion();
    Recipes(recipes: _recipe,);
     super.initState();
   }
@@ -92,7 +95,7 @@ class _HomeState extends State<Home> {
           return Consultas(consultas: _consultas);
         break;
       case 2:
-         return  Evolucion();
+         return  Evolucion(evoluciones: _evoluciones,);
         break;
       case 3:
          return Recipes(recipes: _recipe,);
@@ -162,6 +165,24 @@ class _HomeState extends State<Home> {
         print(variable.items);
         print('Ya estoy en Pidiendo Consultas');
         _consultas = variable.items;
+    });
+    }
+
+     void traerEvolucion() async{
+     int id;
+     id = widget.pacient.id;
+     String url = 'http://10.0.2.2:3000/evolution/patient$id'; 
+
+   await http.get(url, headers: {
+      'Accept': 'application/json'
+    },
+    ).then((response) {
+       final decodedData = jsonDecode(response.body);
+       final variable = new Evolucions.fromJsonList(decodedData);
+       print(decodedData);
+        print(variable.items);
+        print('Ya estoy en Pidiendo Evolucion');
+        _evoluciones = variable.items;
     });
     }
 }

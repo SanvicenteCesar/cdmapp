@@ -63,7 +63,7 @@ TextEditingController _controlleremail = new TextEditingController();
                     SizedBox(
                       height: 40.0,
                     ),
-                    buildTextField("Correo", 30, _controlleremail),
+                    buildTextField("User", 30, _controlleremail),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -116,7 +116,7 @@ TextEditingController _controlleremail = new TextEditingController();
           borderRadius: BorderRadius.circular(20.0),
           
         ),
-        prefixIcon: hintText == "Correo" ? Icon(Icons.email) : Icon(Icons.lock),
+        prefixIcon: hintText == "User" ? Icon(Icons.email) : Icon(Icons.lock),
         suffixIcon: hintText == "Password"
             ? IconButton(
                 onPressed: _toggleVisibility,
