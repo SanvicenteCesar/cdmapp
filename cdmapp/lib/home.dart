@@ -5,6 +5,8 @@ import 'package:cdmapp/class/evolucionclass.dart';
 import 'package:cdmapp/class/pacienteclass.dart';
 import 'package:cdmapp/class/presupuestoclass.dart';
 import 'package:cdmapp/class/recipeclass.dart';
+import 'package:cdmapp/class/seguimientoOrtodonciaclass.dart';
+import 'package:cdmapp/class/seguimientoTodos.dart';
 import 'package:cdmapp/vistasprincipales/consultas.dart';
 import 'package:cdmapp/vistasprincipales/evolucion.dart';
 import 'package:cdmapp/vistasprincipales/perfil.dart';
@@ -25,7 +27,9 @@ class _HomeState extends State<Home> {
   List<Recip> _recipe = new List<Recip>();
   List<Presupuest> _presupuestos = new List<Presupuest>();
   List<Consulta> _consultas = new List<Consulta>();
-   List<Evolucio> _evoluciones = new List<Evolucio>();
+  List<Evolucio> _evoluciones = new List<Evolucio>();
+   List<SeguimientoTod> _seguimientoTodos = new List<SeguimientoTod>();
+   List<SeguimientoOrtod> _seguimientoOrtodoncia = new List<SeguimientoOrtod>();
    int _currentindex = 0;
 @override
   void initState() {
@@ -33,7 +37,8 @@ class _HomeState extends State<Home> {
    traerPresupuestos();
    traerCosultas();
    traerEvolucion();
-   Recipes(recipes: _recipe,);
+   traerseguimientotodosdiente();
+   traerseguimientoOrtodoncia();
     super.initState();
   }
   @override
@@ -103,9 +108,10 @@ class _HomeState extends State<Home> {
       case 4:
            return  Presupuesto(presupuestos: _presupuestos,);
         break;
-        case 4:
-           return  Seguimiento();
+        case 5:
+           return  Seguimiento(seguimientostodos: _seguimientoTodos,seguimientosortodoncias: _seguimientoOrtodoncia,);
         break;
+        
       default:
     }
 
@@ -183,6 +189,40 @@ class _HomeState extends State<Home> {
         print(variable.items);
         print('Ya estoy en Pidiendo Evolucion');
         _evoluciones = variable.items;
+    });
+    }
+     void traerseguimientotodosdiente() async{
+     int id;
+     id = widget.pacient.id;
+     String url = 'http://10.0.2.2:3000/seguimientotodosdientes/patientseguimiento$id'; 
+
+   await http.get(url, headers: {
+      'Accept': 'application/json'
+    },
+    ).then((response) {
+       final decodedData = jsonDecode(response.body);
+       final variable = new SeguimientoTodos.fromJsonList(decodedData);
+       print(decodedData);
+        print(variable.items);
+        print('Ya estoy en Pidiendo Seguimiento todos');
+        _seguimientoTodos = variable.items;
+    });
+    }
+     void traerseguimientoOrtodoncia() async{
+     int id;
+     id = widget.pacient.id;
+     String url = 'http://10.0.2.2:3000/ortodoncia/patient/ortodoncia/$id'; 
+
+   await http.get(url, headers: {
+      'Accept': 'application/json'
+    },
+    ).then((response) {
+       final decodedData = jsonDecode(response.body);
+       final variable = new SeguimientoOrtodon.fromJsonList(decodedData);
+       print(decodedData);
+        print(variable.items);
+        print('Ya estoy en Pidiendo Ortodoncia');
+        _seguimientoOrtodoncia = variable.items;
     });
     }
 }

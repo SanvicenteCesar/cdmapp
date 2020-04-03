@@ -30,58 +30,73 @@ class _PerfilState extends State<Perfil> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Text('Nombre:  ' + widget.paciente.name, style: TextStyle(
-                   fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                  ),)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Nombre:  ' + widget.paciente.name, style: TextStyle(
+                     fontSize: 20,
+                     fontStyle: FontStyle.italic,
+                     color: Colors.black87,
+                     letterSpacing: 0.4
+                    ),),
+                  )
                 ],
 
               ),
               SizedBox(height: 10,),
                Row(
                 children: <Widget>[
-                  Text('Cedula:  ' + widget.paciente.dni, style: TextStyle(
-                   fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                  ),)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Cedula:  ' + widget.paciente.dni, style: TextStyle(
+                     fontSize: 20,
+                     fontStyle: FontStyle.italic,
+                     color: Colors.black87,
+                     letterSpacing: 0.4
+                    ),),
+                  )
                 ],
 
               ),
               SizedBox(height: 10,),
                Row(
                 children: <Widget>[
-                  Text('Celular:  ' + widget.paciente.mobile, style: TextStyle(
-                   fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                  ),)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Celular:  ' + widget.paciente.mobile, style: TextStyle(
+                     fontSize: 20,
+                     fontStyle: FontStyle.italic,
+                     color: Colors.black87,
+                     letterSpacing: 0.4
+                    ),),
+                  )
                 ],
 
               ),
               SizedBox(height: 10,),
                Row(
                 children: <Widget>[
-                  Text('Edad:  ' + widget.paciente.age.toString(), style: TextStyle(
-                    fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                  ),),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Edad:  ' + widget.paciente.age.toString(), style: TextStyle(
+                      fontSize: 20,
+                     fontStyle: FontStyle.italic,
+                     color: Colors.black87,
+                     letterSpacing: 0.4
+                    ),),
+                  ),
                   SizedBox(height: 10,),
                    Row(
                 children: <Widget>[
                    SizedBox(height: 10,),
-                  Text('   Sexo:  ' + widget.paciente.sex, style: TextStyle(
-                    fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                  ),)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('   Sexo:  ' + widget.paciente.sex, style: TextStyle(
+                      fontSize: 20,
+                     fontStyle: FontStyle.italic,
+                     color: Colors.black87,
+                     letterSpacing: 0.4
+                    ),),
+                  )
                 ],
 
               ),
@@ -91,24 +106,30 @@ class _PerfilState extends State<Perfil> {
                SizedBox(height: 10,),
                Row(
                 children: <Widget>[
-                  Text('Direccion:  ' + widget.paciente.homeAddress, style: TextStyle(
-                   fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                  ),)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Direccion:  ' + widget.paciente.homeAddress, style: TextStyle(
+                     fontSize: 20,
+                     fontStyle: FontStyle.italic,
+                     color: Colors.black87,
+                     letterSpacing: 0.4
+                    ),),
+                  )
                 ],
 
               ),
                 SizedBox(height: 10,),
                Row(
                 children: <Widget>[
-                  Text('Doctor Encargado :  ' + widget.paciente.registradoPor.toString(), style: TextStyle(
-                    fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                  ),)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Doctor Encargado :  ' + widget.paciente.registradoPor.toString(), style: TextStyle(
+                      fontSize: 20,
+                     fontStyle: FontStyle.italic,
+                     color: Colors.black87,
+                     letterSpacing: 0.4
+                    ),),
+                  )
                 ],
 
               ),

@@ -169,26 +169,26 @@ TextEditingController _controlleremail = new TextEditingController();
        print(variable.name);
        print(variable.id);
       // traerRecipes(variable.id);
-       Navigator.pop(context);
-       Navigator.push(context, MaterialPageRoute(builder: (_) =>Login()));
-       } else {
-       showDialog(
+      showDialog(
           context: context,
           builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Usuario o contraseña Incorrecta"),
-            content: Text("Verifique con su odontologo si posee cuenta registrada"),
+            title: Text("Verifique su correo electronico"),
+            content: Text(""),
             actions: [
               FlatButton(
                 child: Text("Aceptar"),
                 onPressed: () {
-                  Navigator.pop(context);
+                 Navigator.pop(context);
+                 Navigator.pop(context);
+                 Navigator.push(context, MaterialPageRoute(builder: (_) =>Login()));
                  },
               ),
             ],
             );
     },
   );
+      
        }
     
       
