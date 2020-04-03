@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
   Widget ver() {
     switch (_currentindex) {
       case 0:
-          return Perfil();
+          return Perfil(paciente: widget.pacient);
         break;
       case 1:
           return Consultas(consultas: _consultas);

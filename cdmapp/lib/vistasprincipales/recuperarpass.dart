@@ -4,18 +4,18 @@ import 'dart:convert';
 import 'package:cdmapp/class/pacienteclass.dart';
 import 'package:cdmapp/class/recipeclass.dart';
 import 'package:cdmapp/home.dart';
-import 'package:cdmapp/vistasprincipales/recuperarpass.dart';
+import 'package:cdmapp/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class Login extends StatefulWidget {
-  Login({Key key}) : super(key: key);
+class RecuperarPass extends StatefulWidget {
+  RecuperarPass({Key key}) : super(key: key);
  
   @override
-  _LoginState createState() => _LoginState();
+  _RecuperarPassState createState() => _RecuperarPassState();
 }
 
-class _LoginState extends State<Login> {
+class _RecuperarPassState extends State<RecuperarPass> {
  bool _isHidden = true;
  Paciente paciente = new Paciente();
  List<Recip> recipe = new List<Recip>();
@@ -64,11 +64,10 @@ TextEditingController _controlleremail = new TextEditingController();
                     SizedBox(
                       height: 40.0,
                     ),
-                    buildTextField("User", 30, _controlleremail),
+                    buildTextField("Correo", 30, _controlleremail),
                     SizedBox(
                       height: 20.0,
                     ),
-                    buildTextField("Password", 20, _controllerpassword),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -76,17 +75,7 @@ TextEditingController _controlleremail = new TextEditingController();
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          FlatButton(
-                            onPressed: (){
-                               Navigator.push(context, MaterialPageRoute(builder: (_) => RecuperarPass()));
-                            },
-                              child: Text(
-                              "Olvidaste tu contraseña?",
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                          ),
+                          
                         ],
                       ),
                     ),
@@ -122,7 +111,7 @@ TextEditingController _controlleremail = new TextEditingController();
           borderRadius: BorderRadius.circular(20.0),
           
         ),
-        prefixIcon: hintText == "User" ? Icon(Icons.email) : Icon(Icons.lock),
+        prefixIcon: hintText == "Correo" ? Icon(Icons.email) : Icon(Icons.lock),
         suffixIcon: hintText == "Password"
             ? IconButton(
                 onPressed: _toggleVisibility,
@@ -150,7 +139,7 @@ TextEditingController _controlleremail = new TextEditingController();
         ),
         child: Center(
           child: Text(
-            "Iniciar Sesión",
+            "Recuperar Contraseña",
             style: TextStyle(
               color: Colors.white,
               fontSize: 18.0,
@@ -159,18 +148,17 @@ TextEditingController _controlleremail = new TextEditingController();
         ),
       ),
       onTap: () {
-         _logindata(context);
+         _RecuperarPassdata(context);
       },
     );
   }
-   void _logindata(BuildContext context) async {
-    String url = "http://10.0.2.2:3000/patient/login";
+   void _RecuperarPassdata(BuildContext context) async {
+    String url = "http://10.0.2.2:3000/patient/pass";
 
     http.post(url, headers: {
       'Accept': 'application/json'
     }, body: {
-      "username": _controlleremail.text,
-      "password": _controllerpassword.text,
+      "mail": _controlleremail.text,
     }).then((response) {
       if (response.contentLength > 1 ) {
        final decodedData = jsonDecode(response.body);
@@ -178,11 +166,11 @@ TextEditingController _controlleremail = new TextEditingController();
        _controlleremail.clear();
         _controllerpassword.clear();
         print("------------------");
-       print(decodedData);
-       print(variable.userType);
+       print(variable.name);
+       print(variable.id);
       // traerRecipes(variable.id);
-       
-       Navigator.push(context, MaterialPageRoute(builder: (_) => Home(pacient: variable ,)));
+       Navigator.pop(context);
+       Navigator.push(context, MaterialPageRoute(builder: (_) =>Login()));
        } else {
        showDialog(
           context: context,
