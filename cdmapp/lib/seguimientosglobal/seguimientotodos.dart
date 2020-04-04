@@ -21,59 +21,41 @@ class _SeguimientoAtodosState extends State<SeguimientoAtodos> {
       body: ListView.builder(
             itemCount: widget.seguimientosatodos.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                leading: Icon(Icons.search),
-                title: Text('Proced: '+ widget.seguimientosatodos[index].procedimientoOdontologico,
-                 style: TextStyle(
-                   fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                 ),),
-                subtitle: Text('Diagnostico: ' + widget.seguimientosatodos[index].diagnostico +' Estado: ' + widget.seguimientosatodos[index].diagnostico,
-                 style: TextStyle(
-                   fontSize: 20,
-                   fontStyle: FontStyle.italic,
-                   color: Colors.black87,
-                   letterSpacing: 0.4
-                 ), ),
-                trailing: Icon(Icons.person),
-                onTap: (){
-                 showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width * 0.3,
-                          child: AlertDialog(
-                            title: Text('Estado : ' + widget.seguimientosatodos[index].estatus),
-                            content:Column(
-                              children: <Widget>[
-                               Container(
-                                 child: Text("Recomendaciones:"),
-
-                               ),
-                               Text(widget.seguimientosatodos[index].recomendaciones),
-                                  Container(
-                                 child: Text("Observaciones:"),
-
-                               ),
-                               Text(widget.seguimientosatodos[index].observaciones),
-                              
-                                 ],
-                            ) ,
-                            actions: [
-                            FlatButton(
-                              child: Text("Aceptar"),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ],
-                      ),
-                        );
-          });
-                },
-              );
+              return Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: Card(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(18.0),
+                                child: Image.asset('assets/odn.png'),
+                              ),
+                              Text("Estatus : " + widget.seguimientosatodos[index].estatus),
+                            ],
+                          ),
+                        ),
+                          Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Procedimiento Aplicado : " + widget.seguimientosatodos[index].procedimientoOdontologico),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Diagnostico : " + widget.seguimientosatodos[index].diagnostico),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Observaciones : " + widget.seguimientosatodos[index].observaciones),
+                        ),
+                      
+                      ],
+                    ),
+                  ),
+                );
             },
           ),
     );

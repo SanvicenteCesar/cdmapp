@@ -1,15 +1,18 @@
 import 'package:cdmapp/class/seguimientoOrtodonciaclass.dart';
 import 'package:cdmapp/class/seguimientoTodos.dart';
+import 'package:cdmapp/class/seguimientoadienteclass.dart';
+import 'package:cdmapp/seguimientosglobal/seguimientoOdontograma.dart';
 import 'package:cdmapp/seguimientosglobal/seguimientoortodoncia.dart';
 import 'package:cdmapp/seguimientosglobal/seguimientotodos.dart';
 import 'package:flutter/material.dart';
 
 class Seguimiento extends StatefulWidget {
 
-  Seguimiento({this.seguimientostodos,this.seguimientosortodoncias});
+  Seguimiento({this.seguimientostodos,this.seguimientosortodoncias,this.odontogramas});
 
   final List<SeguimientoTod> seguimientostodos;
   final List<SeguimientoOrtod> seguimientosortodoncias;
+  final List<Seguimientoadiente> odontogramas;
   @override
   _SeguimientoState createState() => _SeguimientoState();
 }
@@ -80,7 +83,10 @@ class _SeguimientoState extends State<Seguimiento> {
                           padding: const EdgeInsets.all(8.0),
                           child: FlatButton(
                             child: Image.asset('assets/pade.png'),
-                            onPressed: (){},
+                            onPressed: (){
+                              print(widget.odontogramas[0].nombrePadecimiento32);
+                                Navigator.push(context, MaterialPageRoute(builder: (_) => Odontograma(odontogramas: widget.odontogramas ,)));
+                            },
                             ),
                         ),
                          

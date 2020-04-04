@@ -7,6 +7,7 @@ import 'package:cdmapp/class/presupuestoclass.dart';
 import 'package:cdmapp/class/recipeclass.dart';
 import 'package:cdmapp/class/seguimientoOrtodonciaclass.dart';
 import 'package:cdmapp/class/seguimientoTodos.dart';
+import 'package:cdmapp/class/seguimientoadienteclass.dart';
 import 'package:cdmapp/vistasprincipales/consultas.dart';
 import 'package:cdmapp/vistasprincipales/evolucion.dart';
 import 'package:cdmapp/vistasprincipales/perfil.dart';
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
   List<Evolucio> _evoluciones = new List<Evolucio>();
    List<SeguimientoTod> _seguimientoTodos = new List<SeguimientoTod>();
    List<SeguimientoOrtod> _seguimientoOrtodoncia = new List<SeguimientoOrtod>();
+    List<Seguimientoadiente> _seguimientoOdontograma = new List<Seguimientoadiente>();
    int _currentindex = 0;
 @override
   void initState() {
@@ -39,6 +41,7 @@ class _HomeState extends State<Home> {
    traerEvolucion();
    traerseguimientotodosdiente();
    traerseguimientoOrtodoncia();
+   traerseguimientoOdontograma();
     super.initState();
   }
   @override
@@ -109,7 +112,7 @@ class _HomeState extends State<Home> {
            return  Presupuesto(presupuestos: _presupuestos,);
         break;
         case 5:
-           return  Seguimiento(seguimientostodos: _seguimientoTodos,seguimientosortodoncias: _seguimientoOrtodoncia,);
+           return  Seguimiento(seguimientostodos: _seguimientoTodos,seguimientosortodoncias: _seguimientoOrtodoncia, odontogramas: _seguimientoOdontograma,);
         break;
         
       default:
@@ -223,6 +226,23 @@ class _HomeState extends State<Home> {
         print(variable.items);
         print('Ya estoy en Pidiendo Ortodoncia');
         _seguimientoOrtodoncia = variable.items;
+    });
+    }
+    void traerseguimientoOdontograma() async{
+     int id;
+     id = widget.pacient.id;
+     String url = 'http://10.0.2.2:3000/odontograma/patient$id'; 
+
+   await http.get(url, headers: {
+      'Accept': 'application/json'
+    },
+    ).then((response) {
+       final decodedData = jsonDecode(response.body);
+       final variable = new SeguimientoAdiente.fromJsonList(decodedData);
+       print(decodedData);
+        print(variable.items[0].imagen32);
+        print('Ya estoy en Pidiendo Odontograma');
+        _seguimientoOdontograma = variable.items;
     });
     }
 }
