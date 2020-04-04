@@ -17,7 +17,7 @@ class _OdontogramaState extends State<Odontograma> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Seguimiento a Procedimientos a Dientes individuales"),
+        title: Text("Dientes individuales"),
 
       ),
       body: ListView.builder(
