@@ -32,7 +32,7 @@ class _SeguimientoAtodosState extends State<SeguimientoAtodos> {
                           child: Column(
                             children: <Widget>[
                               Padding(
-                                padding: const EdgeInsets.all(18.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Image.asset('assets/odn.png'),
                               ),
                               Text("Estatus : " + widget.seguimientosatodos[index].estatus),

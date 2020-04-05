@@ -27,7 +27,7 @@ class _OdontogramaState extends State<Odontograma> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: Card(
-                    color: Colors.grey,
+                    color: Colors.pinkAccent,
                     child: Column(
                       children: <Widget>[
                         Padding(
@@ -80,7 +80,7 @@ class _OdontogramaState extends State<Odontograma> {
                           child: Text("Estado del Procedimiento:  " + widget.odontogramas[index].status,
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.black,
+                            color: Colors.white,
                           ),),
                         ),
                         Padding(
@@ -88,7 +88,7 @@ class _OdontogramaState extends State<Odontograma> {
                           child: Text("Diagnostico:  "+ widget.odontogramas[index].diagnosticoCompleto,
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.black,
+                            color: Colors.white,
                           ),),
                         ),
                        

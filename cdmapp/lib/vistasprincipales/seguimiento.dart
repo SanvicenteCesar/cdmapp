@@ -36,7 +36,10 @@ class _SeguimientoState extends State<Seguimiento> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: FlatButton(
-                            child: Image.asset('assets/odn.png'),
+                            child: Container(
+                               width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.height * 0.23,      
+                              child: Image.asset('assets/todoslosdientes.png')),
                             onPressed: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => SeguimientoAtodos(seguimientosatodos: widget.seguimientostodos ,)));
                             },
@@ -59,7 +62,10 @@ class _SeguimientoState extends State<Seguimiento> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: FlatButton(
-                            child: Image.asset('assets/otr.png'),
+                            child: Container(
+                               width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.height * 0.23,      
+                              child: Image.asset('assets/ortodoncia.png')),
                             onPressed: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => SeguimientoOrtodoncia(seguimientoOrtodoncia: widget.seguimientosortodoncias ,)));
 
@@ -82,7 +88,10 @@ class _SeguimientoState extends State<Seguimiento> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: FlatButton(
-                            child: Image.asset('assets/pade.png'),
+                            child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: MediaQuery.of(context).size.height * 0.23,      
+                              child: Image.asset('assets/dxd.png')),
                             onPressed: (){
                               print(widget.odontogramas[0].nombrePadecimiento32);
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => Odontograma(odontogramas: widget.odontogramas ,)));

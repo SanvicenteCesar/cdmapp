@@ -62,31 +62,31 @@ class _HomeState extends State<Home> {
         currentIndex: _currentindex,
         onTap: cambiarVista,
         type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.deepPurpleAccent,
+        fixedColor: Colors.pink,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            title: Text('Inicio')
+            title: Text('')
           ),
            BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
-            title: Text('Consultas')
+            title: Text('')
           ),
            BottomNavigationBarItem(
             icon: Icon(Icons.folder_shared),
-            title: Text('Evolucion')
+            title: Text('')
           ),
            BottomNavigationBarItem(
             icon: Icon(Icons.receipt),
-            title: Text('Recipes')
+            title: Text('')
           ),
            BottomNavigationBarItem(
             icon: Icon(Icons.monetization_on),
-            title: Text('Presupuesto')
+            title: Text('')
           ),
            BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            title: Text('Seguimiento')
+            title: Text('')
           ),
           
         ],
