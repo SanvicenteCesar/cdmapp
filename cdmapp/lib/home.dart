@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
    void traerRecipes() async{
      int id;
      id = widget.pacient.id;
-     String url = 'http://10.0.2.2:3000/recipe/patientrecipe$id'; 
+     String url = 'http://192.168.0.103:3000/recipe/patientrecipe$id'; 
 
    await http.get(url, headers: {
       'Accept': 'application/json'
@@ -145,7 +145,7 @@ class _HomeState extends State<Home> {
    void traerPresupuestos() async{
      int id;
      id = widget.pacient.id;
-     String url = 'http://10.0.2.2:3000/presupuesto/patientpresupuesto$id'; 
+     String url = 'http://192.168.0.103:3000/presupuesto/patientpresupuesto$id'; 
 
    await http.get(url, headers: {
       'Accept': 'application/json'
@@ -162,7 +162,7 @@ class _HomeState extends State<Home> {
      void traerCosultas() async{
      int id;
      id = widget.pacient.id;
-     String url = 'http://10.0.2.2:3000/consulta/patient$id'; 
+     String url = 'http://192.168.0.103:3000/consulta/patient$id'; 
 
    await http.get(url, headers: {
       'Accept': 'application/json'
@@ -180,7 +180,7 @@ class _HomeState extends State<Home> {
      void traerEvolucion() async{
      int id;
      id = widget.pacient.id;
-     String url = 'http://10.0.2.2:3000/evolution/patient$id'; 
+     String url = 'http://192.168.0.103:3000/evolution/patient$id'; 
 
    await http.get(url, headers: {
       'Accept': 'application/json'
@@ -197,7 +197,7 @@ class _HomeState extends State<Home> {
      void traerseguimientotodosdiente() async{
      int id;
      id = widget.pacient.id;
-     String url = 'http://10.0.2.2:3000/seguimientotodosdientes/patientseguimiento$id'; 
+     String url = 'http://192.168.0.103:3000/seguimientotodosdientes/patientseguimiento$id'; 
 
    await http.get(url, headers: {
       'Accept': 'application/json'
@@ -214,7 +214,7 @@ class _HomeState extends State<Home> {
      void traerseguimientoOrtodoncia() async{
      int id;
      id = widget.pacient.id;
-     String url = 'http://10.0.2.2:3000/ortodoncia/patient/ortodoncia/$id'; 
+     String url = 'http://192.168.0.103:3000/ortodoncia/patient/ortodoncia/$id'; 
 
    await http.get(url, headers: {
       'Accept': 'application/json'
@@ -231,7 +231,7 @@ class _HomeState extends State<Home> {
     void traerseguimientoOdontograma() async{
      int id;
      id = widget.pacient.id;
-     String url = 'http://10.0.2.2:3000/odontograma/patient$id'; 
+     String url = 'http://192.168.0.103:3000/odontograma/patient$id'; 
 
    await http.get(url, headers: {
       'Accept': 'application/json'

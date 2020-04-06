@@ -77,11 +77,11 @@ class _OdontogramaState extends State<Odontograma> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(18.0),
-                          child: Text("Estado del Procedimiento:  " + widget.odontogramas[index].status,
+                          child: widget.odontogramas[index].status != null ? Text("Estado del Procedimiento:  " + widget.odontogramas[index].status,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
-                          ),),
+                          ),) : Text('NO posee'),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
