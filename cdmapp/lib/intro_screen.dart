@@ -31,7 +31,7 @@ class IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFEEEEEE),
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(1.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
