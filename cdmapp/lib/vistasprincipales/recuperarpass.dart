@@ -173,7 +173,7 @@ TextEditingController _controlleremail = new TextEditingController();
           context: context,
           builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Verifique su correo electronico"),
+            title: Text("Verifique su e-mail"),
             content: Text(""),
             actions: [
               FlatButton(
@@ -189,6 +189,28 @@ TextEditingController _controlleremail = new TextEditingController();
     },
   );
       
+       } else {
+showDialog(
+          context: context,
+          builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("e-mail no registrado"),
+            content: Text(""),
+            actions: [
+              FlatButton(
+                child: Text("Aceptar"),
+                onPressed: () {
+                 Navigator.pop(context);
+                 Navigator.pop(context);
+                 Navigator.push(context, MaterialPageRoute(builder: (_) =>Login()));
+                 },
+              ),
+            ],
+            );
+    },
+  );
+
+
        }
     
       
