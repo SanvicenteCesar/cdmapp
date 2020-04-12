@@ -13,7 +13,7 @@ class _PresupuestoState extends State<Presupuesto> {
   @override
 
   Widget build(BuildContext context) {
-    print(widget.presupuestos.length);
+  
     return Scaffold(
       appBar: AppBar(
         title: Text('Presupuestos'),

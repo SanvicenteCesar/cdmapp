@@ -165,9 +165,7 @@ TextEditingController _controlleremail = new TextEditingController();
        final variable = new Paciente.mapeado(decodedData);
        _controlleremail.clear();
         _controllerpassword.clear();
-        print("------------------");
-       print(variable.name);
-       print(variable.id);
+      
       // traerRecipes(variable.id);
       showDialog(
           context: context,

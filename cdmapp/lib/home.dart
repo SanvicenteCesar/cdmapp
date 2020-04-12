@@ -14,7 +14,10 @@ import 'package:cdmapp/vistasprincipales/perfil.dart';
 import 'package:cdmapp/vistasprincipales/presupuesto.dart';
 import 'package:cdmapp/vistasprincipales/recipe.dart';
 import 'package:cdmapp/vistasprincipales/seguimiento.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 class Home extends StatefulWidget {
 
@@ -25,6 +28,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 class _HomeState extends State<Home> {
+   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   List<Recip> _recipe = new List<Recip>();
   List<Presupuest> _presupuestos = new List<Presupuest>();
   List<Consulta> _consultas = new List<Consulta>();
@@ -43,6 +47,7 @@ class _HomeState extends State<Home> {
    traerseguimientoOrtodoncia();
    traerseguimientoOdontograma();
     super.initState();
+     setupNotificationPlugin();
   }
   @override
   Widget build(BuildContext context) {
@@ -136,9 +141,7 @@ class _HomeState extends State<Home> {
     ).then((response) {
        final decodedData = jsonDecode(response.body);
        final variable = new Recipe.fromJsonList(decodedData);
-       print(decodedData);
-        print(variable.items);
-        print('Ya estoy en Pidiendo recipes');
+     
         _recipe = variable.items;
     });
     }
@@ -153,9 +156,7 @@ class _HomeState extends State<Home> {
     ).then((response) {
        final decodedData = jsonDecode(response.body);
        final variable = new Presupuests.fromJsonList(decodedData);
-       print(decodedData);
-        print(variable.items);
-        print('Ya estoy en Pidiendo PRESUPUESTOS');
+       
         _presupuestos = variable.items;
     });
     }
@@ -170,9 +171,7 @@ class _HomeState extends State<Home> {
     ).then((response) {
        final decodedData = jsonDecode(response.body);
        final variable = new Consults.fromJsonList(decodedData);
-       print(decodedData);
-        print(variable.items);
-        print('Ya estoy en Pidiendo Consultas');
+      
         _consultas = variable.items;
     });
     }
@@ -188,9 +187,7 @@ class _HomeState extends State<Home> {
     ).then((response) {
        final decodedData = jsonDecode(response.body);
        final variable = new Evolucions.fromJsonList(decodedData);
-       print(decodedData);
-        print(variable.items);
-        print('Ya estoy en Pidiendo Evolucion');
+      
         _evoluciones = variable.items;
     });
     }
@@ -205,9 +202,7 @@ class _HomeState extends State<Home> {
     ).then((response) {
        final decodedData = jsonDecode(response.body);
        final variable = new SeguimientoTodos.fromJsonList(decodedData);
-       print(decodedData);
-        print(variable.items);
-        print('Ya estoy en Pidiendo Seguimiento todos');
+       
         _seguimientoTodos = variable.items;
     });
     }
@@ -222,9 +217,7 @@ class _HomeState extends State<Home> {
     ).then((response) {
        final decodedData = jsonDecode(response.body);
        final variable = new SeguimientoOrtodon.fromJsonList(decodedData);
-       print(decodedData);
-        print(variable.items);
-        print('Ya estoy en Pidiendo Ortodoncia');
+      
         _seguimientoOrtodoncia = variable.items;
     });
     }
@@ -239,10 +232,62 @@ class _HomeState extends State<Home> {
     ).then((response) {
        final decodedData = jsonDecode(response.body);
        final variable = new SeguimientoAdiente.fromJsonList(decodedData);
-       print(decodedData);
-        print(variable.items[0].imagen32);
-        print('Ya estoy en Pidiendo Odontograma');
+      
         _seguimientoOdontograma = variable.items;
     });
     }
+    Future<void> setupNotificationPlugin() async {
+      var now = new DateTime.now();
+      String hoy = formatDate(now,[HH, ':', nn]);
+     if (hoy.toString() == '11:55') {
+
+     }
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+// initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+var initializationSettingsAndroid = AndroidInitializationSettings('launch_image');
+var initializationSettingsIOS = IOSInitializationSettings(
+    onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+var initializationSettings = InitializationSettings(
+    initializationSettingsAndroid, initializationSettingsIOS);
+await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+    onSelectNotification: selectNotification);
+  print('------Notificaciones----');
+ var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    'your channel id', 'your channel name', 'your channel description',
+    importance: Importance.Max, priority: Priority.High, ticker: 'ticker');
+var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+var platformChannelSpecifics = NotificationDetails(
+    androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+await flutterLocalNotificationsPlugin.show(
+    0, ' Notificaciones de Consultas', 'Recuerde visualizar hoy las consultas.', platformChannelSpecifics,
+    payload: 'item x');
+  }
+
+ Future onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {
+    // display a dialog with the notification details, tap ok to go to another page
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+            title: Text(title),
+            content: Text(body),
+            actions: [
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                child: Text('Ok'),
+                onPressed: () async {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  
+                },
+              )
+            ],
+          ),
+    );
+  }
+  Future selectNotification(String payload) async {
+    if (payload == null) {
+      debugPrint('notification payload: ' + payload);
+    }
+  
+}
 }

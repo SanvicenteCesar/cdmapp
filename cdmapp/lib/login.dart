@@ -177,9 +177,7 @@ TextEditingController _controlleremail = new TextEditingController();
        final variable = new Paciente.mapeado(decodedData);
        _controlleremail.clear();
         _controllerpassword.clear();
-        print("------------------");
-       print(decodedData);
-       print(variable.userType);
+      
       // traerRecipes(variable.id);
        
        Navigator.push(context, MaterialPageRoute(builder: (_) => Home(pacient: variable ,)));

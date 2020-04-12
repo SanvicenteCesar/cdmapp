@@ -1,8 +1,6 @@
 import 'package:cdmapp/login.dart';
 import 'package:cdmapp/utils/flutkart.dart';
 import 'package:flutter/material.dart';
-import 'package:cdmapp/utils/my_navigator.dart';
-import 'package:cdmapp/widgets/walkthrough.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
