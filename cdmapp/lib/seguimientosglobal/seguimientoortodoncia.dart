@@ -26,7 +26,7 @@ class _SeguimientoOrtodonciaState extends State<SeguimientoOrtodoncia> {
               itemBuilder: (context, index) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.35,
                   child: Card(
                     child: Column(
                       children: <Widget>[
@@ -38,11 +38,22 @@ class _SeguimientoOrtodonciaState extends State<SeguimientoOrtodoncia> {
                                 padding: const EdgeInsets.all(18.0),
                                 child: Image.asset('assets/otr.png'),
                               ),
-                              Text("Diagnostico : " + widget.seguimientoOrtodoncia[index].diagnostico),
-                            ],
-                          ),
-                        ),
-                        Padding(
+                              FlatButton(
+                                color: Colors.pink,
+                                onPressed: (){
+                                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Detalles : '),
+                          content: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                 Padding(
+                                   padding: const EdgeInsets.all(8.0),
+                                   child: Text( widget.seguimientoOrtodoncia[index].diagnostico,),
+                                 ),
+                                 Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text("Medicaciones : " + widget.seguimientoOrtodoncia[index].medicaciones),
                         ),
@@ -50,6 +61,25 @@ class _SeguimientoOrtodonciaState extends State<SeguimientoOrtodoncia> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text("Plan de tratamiento : " + widget.seguimientoOrtodoncia[index].plandeTratamiento),
                         )
+                              ],
+                            ),
+                          ),
+                          actions: [
+                          FlatButton(
+                            child: Text("Aceptar"),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      );
+          });
+                                },
+                                child: Text("Ver Detalles", style: TextStyle(color: Colors.white), )),
+                            ],
+                          ),
+                        ),
+                        
                       ],
                     ),
                   ),

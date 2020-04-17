@@ -78,13 +78,28 @@ class _OdontogramaState extends State<Odontograma> {
                        
                         Padding(
                           padding: const EdgeInsets.all(18.0),
-                          child: Text("Diagnostico:  "+ widget.odontogramas[index].diagnosticoCompleto,
-                          style: TextStyle(
-                            
-                            fontSize: 18,
-                            color: Colors.white,
-
-                          ),textAlign: TextAlign.center,),
+                          child: Container(
+                           
+                            child: FlatButton(
+                              onPressed: (){
+                                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Diagnostico : '),
+                          content: Text(widget.odontogramas[index].diagnosticoCompleto,),
+                          actions: [
+                          FlatButton(
+                            child: Text("Aceptar"),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      );
+          });
+                              }, child: Text("Ver Detalles", style: TextStyle(color: Colors.white), )),
+                          ),
                         ),
                        
                       ],
