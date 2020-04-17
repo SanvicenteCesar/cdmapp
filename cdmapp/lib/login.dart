@@ -122,7 +122,7 @@ TextEditingController _controlleremail = new TextEditingController();
           borderRadius: BorderRadius.circular(20.0),
           
         ),
-        prefixIcon: hintText == "User" ? Icon(Icons.email) : Icon(Icons.lock),
+        prefixIcon: hintText == "User" ? Icon(Icons.person) : Icon(Icons.lock),
         suffixIcon: hintText == "Password"
             ? IconButton(
                 onPressed: _toggleVisibility,
